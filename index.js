@@ -1,4 +1,4 @@
-const { text } = require("micro");
+const { text, send } = require("micro");
 const { parse } = require("querystring");
 const handle = require("./lib/handle");
 
@@ -13,23 +13,19 @@ module.exports = async (req, res) => {
     if (output.blocks && output.blocks.length) {
       console.log(`Sending response with ${output.blocks.length} blocks.`);
     }
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(
-      JSON.stringify({
-        response_type: output.responseType || "in_channel",
-        text: output.text,
-        blocks: output.blocks
-      })
-    );
+    send(res, 200, {
+      response_type: output.responseType || "in_channel",
+      text: output.text,
+      blocks: output.blocks
+    });
   } catch (err) {
     console.error(err);
     if (err.response) {
       const { statusCode } = err.response;
-      res.writeHead(statusCode, { "Content-Type": "application/json" });
-      res.end(JSON.stringify(err.response.body));
+      send(res, statusCode, err.response.body);
     } else {
-      res.writeHead(500, { "Content-Type": "application/json" });
-      res.end(JSON.stringify(err.toString()));
+      res.writeHead(500, headers);
+      send(res, statusCode, err.toString());
     }
   }
 };
