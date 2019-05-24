@@ -1,0 +1,18 @@
+{
+  "name": "emojiboard",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Brian Beck <exogen@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "got": "^9.6.0",
+    "lodash.orderby": "^4.6.0",
+    "micro": "^9.3.4"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0"
+  }
+}
