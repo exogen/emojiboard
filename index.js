@@ -24,7 +24,6 @@ module.exports = async (req, res) => {
       const { statusCode } = err.response;
       send(res, statusCode, err.response.body);
     } else {
-      res.writeHead(500, headers);
       send(res, statusCode, err.toString());
     }
   }
