@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
       const { statusCode } = err.response;
       send(res, statusCode, err.response.body);
     } else {
-      send(res, statusCode, err.toString());
+      send(res, 500, err.toString());
     }
   }
 };
