@@ -1,8 +1,15 @@
 const { text, send } = require("micro");
 const { parse } = require("querystring");
 const handle = require("./lib/handle");
+const verifySlackRequest = require("./lib/verify");
 
 module.exports = async (req, res) => {
+  try {
+    await verifySlackRequest(req);
+  } catch (err) {
+    send(res, err.statusCode, err.toString());
+    return;
+  }
   const input = parse(await text(req));
   console.log(input); // Useful for debugging.
   const arg = (input.text || "").trim().split(/\s+/)[0];

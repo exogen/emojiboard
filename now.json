@@ -3,6 +3,7 @@
   "name": "emojiboard",
   "builds": [{ "src": "*.js", "use": "@now/node" }],
   "env": {
-    "SLACK_OAUTH_TOKEN": "@slack-oauth-token"
+    "SLACK_OAUTH_TOKEN": "@slack-oauth-token",
+    "SLACK_SIGNING_SECRET": "@slack-signing-secret"
   }
 }
